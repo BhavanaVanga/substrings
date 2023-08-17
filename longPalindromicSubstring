@@ -1,0 +1,48 @@
+//aaaabbaa output->aabbaa
+#include <bits/stdc++.h>
+using namespace std;
+string longPalindromicSubstring(string s)
+{
+	int n=s.length();
+	int st=0;
+	int ml=1;
+	vector<vector<int>>v(n,vector<int>(n,0));
+	for(int i=0;i<n;i++)
+	{
+		v[i][i]=1;
+	}
+	for(int i=0;i<n-1;i++)
+	{
+		if(s[i]==s[i+1]){
+		 v[i][i+1]=1;
+		 st=i;
+		 ml=2;
+		}
+		 
+	}
+	for(int l=3;l<=n;l++)
+	{
+		for(int i=0;i<n-1;i++)
+		{
+			int j=i+l-1;
+			if(s[i]==s[j]&&v[i+1][j-1]){
+			  v[i][j]=1;
+			  if(l>ml)
+			    {
+			    	ml=l;
+			    	st=i;
+			    }
+			}
+		}
+	}
+	return s.substr(st,ml);
+}
+int main() {
+	// your code goes here
+	string s;
+	cin>>s;
+	cout<<longPalindromicSubstring(s);
+	return 06
+}
+
+//aaaabbaa ->1
